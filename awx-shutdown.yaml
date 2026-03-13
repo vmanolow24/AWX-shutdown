@@ -1,0 +1,10 @@
+---
+- name: Stop K3s cluster
+  hosts: k3s
+  become: yes
+
+  tasks:
+    - name: Stop K3s service
+      ansible.builtin.systemd:
+        name: k3s
+        state: stopped
