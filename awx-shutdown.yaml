@@ -4,7 +4,7 @@
   become: true
   tasks:
     - name: Check if K3s service exists
-      ansible.builtin.shell: systemctl lis-units --type=service | grep -q '^k3s.service'
+      ansible.builtin.shell: systemctl list-units --type=service | grep -q '^k3s.service'
       register: k3s_exists
       ignore_errors: yes
       changed_when: false
