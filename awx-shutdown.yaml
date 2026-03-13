@@ -1,10 +1,16 @@
 ---
 - name: Stop K3s cluster
   hosts: all
-  become: yes
-
+  become: true
   tasks:
-    - name: Stop K3s service
+    - name: Check if K3s service exists
+      ansible.builtin.shell: systemctl lis-units --type=service | grep -q '^k3s.service'
+      register: k3s_exists
+      ignore_errors: yes
+      changed_when: false
+
+    - name: Stop K3s service if it exists
       ansible.builtin.systemd:
         name: k3s
         state: stopped
+      when: k3s_exists.rc == 0
