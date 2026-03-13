@@ -1,6 +1,6 @@
 ---
 - name: Stop K3s cluster
-  hosts: k3s
+  hosts: all
   become: yes
 
   tasks:
