@@ -6,14 +6,14 @@
 
     - name: Check if k3s service is active
       ansible.builtin.systemd:
-        name: k3s
+        name: k3s.service
       register: k3s_status
       ignore_errors: yes
       changed_when: false
 
     - name: Stop K3s if running
       ansible.builtin.systemd:
-        name: k3s
+        name: k3s.service
         state: stopped
         enabled: no
       when: k3s_status.status == "running"
